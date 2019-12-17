@@ -2,10 +2,11 @@ import random
 import itertools
 from collections import Counter
 from tkinter import *
-from PIL import ImageTk, Image  #  only non_standard dependency you need to DL
+from PIL import ImageTk, Image  # only non_standard dependency you need to DL
 import threading
 import queue
 import time
+from pathlib import Path
 
 
 def main():
@@ -981,36 +982,37 @@ def main():
 
             self.cc_1 = Label(self.cc_frame, bg="green")
             self.cc_1.place(relwidth=(.50 / 3), relheight=1)
+            image_folder = Path("cards/")
             card_d1 = ImageTk.PhotoImage(
-                Image.open("cards\default0.png").resize((55, 85), Image.ANTIALIAS))
+                Image.open(image_folder / "default0.png").resize((55, 85), Image.ANTIALIAS))
             self.cc_1.image = card_d1
             self.cc_1.configure(image=card_d1)
 
             self.cc_2 = Label(self.cc_frame, bg="green")
             self.cc_2.place(relx=(.50 / 3), relwidth=(.50 / 3), relheight=1)
             card_d2 = ImageTk.PhotoImage(
-                Image.open("cards\default1.png").resize((55, 85), Image.ANTIALIAS))
+                Image.open(image_folder / "default1.png").resize((55, 85), Image.ANTIALIAS))
             self.cc_2.image = card_d2
             self.cc_2.configure(image=card_d2)
 
             self.cc_3 = Label(self.cc_frame, bg="green")
             self.cc_3.place(relx=(.50 / 3) * 2, relwidth=(.50 / 3), relheight=1)
             card_d3 = ImageTk.PhotoImage(
-                Image.open("cards\default1.png").resize((55, 85), Image.ANTIALIAS))
+                Image.open(image_folder / "default1.png").resize((55, 85), Image.ANTIALIAS))
             self.cc_3.image = card_d3
             self.cc_3.configure(image=card_d3)
 
             self.cc_4 = Label(self.cc_frame, bg="green")
             self.cc_4.place(relx=(.50 / 3) * 3, relwidth=0.25, relheight=1)
             card_d4 = ImageTk.PhotoImage(
-                Image.open("cards\default1.png").resize((55, 85), Image.ANTIALIAS))
+                Image.open(image_folder / "default1.png").resize((55, 85), Image.ANTIALIAS))
             self.cc_4.image = card_d4
             self.cc_4.configure(image=card_d4)
 
             self.cc_5 = Label(self.cc_frame, bg="green")
             self.cc_5.place(relx=((.50 / 3) * 3) + 0.25, relwidth=0.25, relheight=1)
             card_d5 = ImageTk.PhotoImage(
-                Image.open("cards\default1.png").resize((55, 85), Image.ANTIALIAS))
+                Image.open(image_folder / "default1.png").resize((55, 85), Image.ANTIALIAS))
             self.cc_5.image = card_d5
             self.cc_5.configure(image=card_d5)
 
@@ -1049,8 +1051,6 @@ def main():
             self.winner_label = Label(self.action_frame, font=("Courier", 12), bd=3)
             self.winner_label.place(relx=0, rely=(1/3), relwidth=0.75, relheight=0.3)
 
-
-
         def update(self, game):
             self.new_round_label.lower(self.action_cover_label)
             self.button_y.lower(self.action_cover_label)
@@ -1058,24 +1058,25 @@ def main():
             self.raise_entry.lower(self.action_cover_label)
             self.raise_button.lower(self.action_cover_label)
             self.winner_label.lower(self.action_cover_label)
+            default_image = Path("cards/default0.png")
             if self.restart:
-                card1 = ImageTk.PhotoImage(Image.open(str("cards\default0.png")).resize((55, 85), Image.ANTIALIAS))
+                card1 = ImageTk.PhotoImage(Image.open(default_image).resize((55, 85), Image.ANTIALIAS))
                 self.cc_1.image = card1
                 self.cc_1.configure(image=card1)
 
-                card1 = ImageTk.PhotoImage(Image.open(str("cards\default0.png")).resize((55, 85), Image.ANTIALIAS))
+                card1 = ImageTk.PhotoImage(Image.open(default_image).resize((55, 85), Image.ANTIALIAS))
                 self.cc_2.image = card1
                 self.cc_2.configure(image=card1)
 
-                card1 = ImageTk.PhotoImage(Image.open(str("cards\default0.png")).resize((55, 85), Image.ANTIALIAS))
+                card1 = ImageTk.PhotoImage(Image.open(default_image).resize((55, 85), Image.ANTIALIAS))
                 self.cc_3.image = card1
                 self.cc_3.configure(image=card1)
 
-                card1 = ImageTk.PhotoImage(Image.open(str("cards\default0.png")).resize((55, 85), Image.ANTIALIAS))
+                card1 = ImageTk.PhotoImage(Image.open(default_image).resize((55, 85), Image.ANTIALIAS))
                 self.cc_4.image = card1
                 self.cc_4.configure(image=card1)
 
-                card1 = ImageTk.PhotoImage(Image.open(str("cards\default0.png")).resize((55, 85), Image.ANTIALIAS))
+                card1 = ImageTk.PhotoImage(Image.open(default_image).resize((55, 85), Image.ANTIALIAS))
                 self.cc_5.image = card1
                 self.cc_5.configure(image=card1)
                 self.restart = False
@@ -1111,28 +1112,30 @@ def main():
                 self.raise_entry.lift(self.action_cover_label)
                 self.raise_button.lift(self.action_cover_label)
             try:
+                image_folder = Path("cards/")
+
                 card1 = ImageTk.PhotoImage(
-                    Image.open("cards\\" + str(game.cards[0]) + ".png").resize((55, 85), Image.ANTIALIAS))
+                    Image.open(image_folder / (str(game.cards[0]) + ".png")).resize((55, 85), Image.ANTIALIAS))
                 self.cc_1.image = card1
                 self.cc_1.configure(image=card1)
 
                 card1 = ImageTk.PhotoImage(
-                    Image.open("cards\\" + str(game.cards[1]) + ".png").resize((55, 85), Image.ANTIALIAS))
+                    Image.open(image_folder / (str(game.cards[1]) + ".png")).resize((55, 85), Image.ANTIALIAS))
                 self.cc_2.image = card1
                 self.cc_2.configure(image=card1)
 
                 card1 = ImageTk.PhotoImage(
-                    Image.open("cards\\" + str(game.cards[2]) + ".png").resize((55, 85), Image.ANTIALIAS))
+                    Image.open(image_folder / (str(game.cards[2]) + ".png")).resize((55, 85), Image.ANTIALIAS))
                 self.cc_3.image = card1
                 self.cc_3.configure(image=card1)
 
                 card1 = ImageTk.PhotoImage(
-                    Image.open("cards\\" + str(game.cards[3]) + ".png").resize((55, 85), Image.ANTIALIAS))
+                    Image.open(image_folder / (str(game.cards[3]) + ".png")).resize((55, 85), Image.ANTIALIAS))
                 self.cc_4.image = card1
                 self.cc_4.configure(image=card1)
 
                 card1 = ImageTk.PhotoImage(
-                    Image.open("cards\\" + str(game.cards[4]) + ".png").resize((55, 85), Image.ANTIALIAS))
+                    Image.open(image_folder / (str(game.cards[4]) + ".png")).resize((55, 85), Image.ANTIALIAS))
                 self.cc_5.image = card1
                 self.cc_5.configure(image=card1)
             except IndexError:
@@ -1164,105 +1167,109 @@ def main():
             except IndexError:
                 pass
             try:
+                image_folder = Path("cards/")
+
                 card1 = ImageTk.PhotoImage(
-                    Image.open("cards\\" + str(game.list_of_players[0].cards[0]) + ".png").resize((55, 85), Image.ANTIALIAS))
+                    Image.open(image_folder / (str(game.list_of_players[0].cards[0]) + ".png")).resize((55, 85), Image.ANTIALIAS))
                 self.card1_p0.image = card1
                 self.card1_p0.configure(image=card1)
 
                 card1 = ImageTk.PhotoImage(
-                    Image.open("cards\\" + str(game.list_of_players[1].cards[0]) + ".png").resize((55, 85), Image.ANTIALIAS))
+                    Image.open(image_folder / (str(game.list_of_players[1].cards[0]) + ".png")).resize((55, 85), Image.ANTIALIAS))
                 self.card1_p1.image = card1
                 self.card1_p1.configure(image=card1)
 
                 card1 = ImageTk.PhotoImage(
-                    Image.open("cards\\" + str(game.list_of_players[2].cards[0]) + ".png").resize((55, 85), Image.ANTIALIAS))
+                    Image.open(image_folder / (str(game.list_of_players[2].cards[0]) + ".png")).resize((55, 85), Image.ANTIALIAS))
                 self.card1_p2.image = card1
                 self.card1_p2.configure(image=card1)
 
                 card1 = ImageTk.PhotoImage(
-                    Image.open("cards\\" + str(game.list_of_players[3].cards[0]) + ".png").resize((55, 85), Image.ANTIALIAS))
+                    Image.open(image_folder / (str(game.list_of_players[3].cards[0]) + ".png")).resize((55, 85), Image.ANTIALIAS))
                 self.card1_p3.image = card1
                 self.card1_p3.configure(image=card1)
 
                 card1 = ImageTk.PhotoImage(
-                    Image.open("cards\\" + str(game.list_of_players[4].cards[0]) + ".png").resize((55, 85), Image.ANTIALIAS))
+                    Image.open(image_folder / (str(game.list_of_players[4].cards[0]) + ".png")).resize((55, 85), Image.ANTIALIAS))
                 self.card1_p4.image = card1
                 self.card1_p4.configure(image=card1)
 
                 card1 = ImageTk.PhotoImage(
-                    Image.open("cards\\" + str(game.list_of_players[5].cards[0]) + ".png").resize((55, 85), Image.ANTIALIAS))
+                    Image.open(image_folder / (str(game.list_of_players[5].cards[0]) + ".png")).resize((55, 85), Image.ANTIALIAS))
                 self.card1_p5.image = card1
                 self.card1_p5.configure(image=card1)
 
                 card1 = ImageTk.PhotoImage(
-                    Image.open("cards\\" + str(game.list_of_players[6].cards[0]) + ".png").resize((55, 85), Image.ANTIALIAS))
+                    Image.open(image_folder / (str(game.list_of_players[6].cards[0]) + ".png")).resize((55, 85), Image.ANTIALIAS))
                 self.card1_p6.image = card1
                 self.card1_p6.configure(image=card1)
 
                 card1 = ImageTk.PhotoImage(
-                    Image.open("cards\\" + str(game.list_of_players[7].cards[0]) + ".png").resize((55, 85), Image.ANTIALIAS))
+                    Image.open(image_folder / (str(game.list_of_players[7].cards[0]) + ".png")).resize((55, 85), Image.ANTIALIAS))
                 self.card1_p7.image = card1
                 self.card1_p7.configure(image=card1)
 
                 card1 = ImageTk.PhotoImage(
-                    Image.open("cards\\" + str(game.list_of_players[8].cards[0]) + ".png").resize((55, 85), Image.ANTIALIAS))
+                    Image.open(image_folder / (str(game.list_of_players[8].cards[0]) + ".png")).resize((55, 85), Image.ANTIALIAS))
                 self.card1_p8.image = card1
                 self.card1_p8.configure(image=card1)
 
                 card1 = ImageTk.PhotoImage(
-                    Image.open("cards\\" + str(game.list_of_players[9].cards[0]) + ".png").resize((55, 85), Image.ANTIALIAS))
+                    Image.open(image_folder / (str(game.list_of_players[9].cards[0]) + ".png")).resize((55, 85), Image.ANTIALIAS))
                 self.card1_p9.image = card1
                 self.card1_p9.configure(image=card1)
             except IndexError:
                 pass
             try:
+                image_folder = Path("cards/")
+
                 card2 = ImageTk.PhotoImage(
-                    Image.open("cards\\" + str(game.list_of_players[0].cards[1]) + ".png").resize((55, 85), Image.ANTIALIAS))
+                    Image.open(image_folder / (str(game.list_of_players[0].cards[1]) + ".png")).resize((55, 85), Image.ANTIALIAS))
                 self.card2_p0.image = card2
                 self.card2_p0.configure(image=card2)
 
                 card2 = ImageTk.PhotoImage(
-                    Image.open("cards\\" + str(game.list_of_players[1].cards[1]) + ".png").resize((55, 85), Image.ANTIALIAS))
+                    Image.open(image_folder / (str(game.list_of_players[1].cards[1]) + ".png")).resize((55, 85), Image.ANTIALIAS))
                 self.card2_p1.image = card2
                 self.card2_p1.configure(image=card2)
 
                 card2 = ImageTk.PhotoImage(
-                    Image.open("cards\\" + str(game.list_of_players[2].cards[1]) + ".png").resize((55, 85), Image.ANTIALIAS))
+                    Image.open(image_folder / (str(game.list_of_players[2].cards[1]) + ".png")).resize((55, 85), Image.ANTIALIAS))
                 self.card2_p2.image = card2
                 self.card2_p2.configure(image=card2)
 
                 card2 = ImageTk.PhotoImage(
-                    Image.open("cards\\" + str(game.list_of_players[3].cards[1]) + ".png").resize((55, 85), Image.ANTIALIAS))
+                    Image.open(image_folder / (str(game.list_of_players[3].cards[1]) + ".png")).resize((55, 85), Image.ANTIALIAS))
                 self.card2_p3.image = card2
                 self.card2_p3.configure(image=card2)
 
                 card2 = ImageTk.PhotoImage(
-                    Image.open("cards\\" + str(game.list_of_players[4].cards[1]) + ".png").resize((55, 85), Image.ANTIALIAS))
+                    Image.open(image_folder / (str(game.list_of_players[4].cards[1]) + ".png")).resize((55, 85), Image.ANTIALIAS))
                 self.card2_p4.image = card2
                 self.card2_p4.configure(image=card2)
 
                 card2 = ImageTk.PhotoImage(
-                    Image.open("cards\\" + str(game.list_of_players[5].cards[1]) + ".png").resize((55, 85), Image.ANTIALIAS))
+                    Image.open(image_folder / (str(game.list_of_players[5].cards[1]) + ".png")).resize((55, 85), Image.ANTIALIAS))
                 self.card2_p5.image = card2
                 self.card2_p5.configure(image=card2)
 
                 card2 = ImageTk.PhotoImage(
-                    Image.open("cards\\" + str(game.list_of_players[6].cards[1]) + ".png").resize((55, 85), Image.ANTIALIAS))
+                    Image.open(image_folder / (str(game.list_of_players[6].cards[1]) + ".png")).resize((55, 85), Image.ANTIALIAS))
                 self.card2_p6.image = card2
                 self.card2_p6.configure(image=card2)
 
                 card2 = ImageTk.PhotoImage(
-                    Image.open("cards\\" + str(game.list_of_players[7].cards[1]) + ".png").resize((55, 85), Image.ANTIALIAS))
+                    Image.open(image_folder / (str(game.list_of_players[7].cards[1]) + ".png")).resize((55, 85), Image.ANTIALIAS))
                 self.card2_p7.image = card2
                 self.card2_p7.configure(image=card2)
 
                 card2 = ImageTk.PhotoImage(
-                    Image.open("cards\\" + str(game.list_of_players[8].cards[1]) + ".png").resize((55, 85), Image.ANTIALIAS))
+                    Image.open(image_folder / (str(game.list_of_players[8].cards[1]) + ".png")).resize((55, 85), Image.ANTIALIAS))
                 self.card2_p8.image = card2
                 self.card2_p8.configure(image=card2)
 
                 card2 = ImageTk.PhotoImage(
-                    Image.open("cards\\" + str(game.list_of_players[9].cards[1]) + ".png").resize((55, 85), Image.ANTIALIAS))
+                    Image.open(image_folder / (str(game.list_of_players[9].cards[1]) + ".png")).resize((55, 85), Image.ANTIALIAS))
                 self.card2_p9.image = card2
                 self.card2_p9.configure(image=card2)
             except IndexError:
